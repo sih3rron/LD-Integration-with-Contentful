@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { AppExtensionSDK } from '@contentful/app-sdk';
-import { Heading, Form, Workbench, Paragraph } from '@contentful/forma-36-react-components';
+import { Heading, Form, Workbench, Paragraph} from '@contentful/forma-36-react-components';
 import { css } from 'emotion';
 
 export interface AppInstallationParameters {}
@@ -56,8 +56,9 @@ const Config = (props: ConfigProps) => {
   return (
     <Workbench className={css({ margin: '80px' })}>
       <Form>
-        <Heading>App Config</Heading>
-        <Paragraph>Welcome to your contentful app. This is your config page.</Paragraph>
+        <Heading>LaunchDarkly - Flag Pole.</Heading>
+        <Paragraph>Welcome to Flag Pole. In order to access your Feature Flags have you completed the following tasks: </Paragraph>
+
       </Form>
     </Workbench>
   );
