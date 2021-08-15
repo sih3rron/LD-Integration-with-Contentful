@@ -1,10 +1,10 @@
 import {useState, useEffect} from 'react';
 import { EntityListItem, DropdownList, DropdownListItem, SkeletonContainer, SkeletonDisplayText, SkeletonBodyText } from '@contentful/forma-36-react-components';
 import Patch from '../functions/Patch';
-const ldTag = "Contentful";
-const environment = "production";
-const projKey = "default";
-const apiToken = "api-bfb311e8-b47c-4539-980d-f28b92ac8612";
+const ldTag = `${process.env.REACT_APP_LDTAG}`;
+const environment = `${process.env.REACT_APP_ENVIRONMENT}`;
+const projKey = `${process.env.REACT_APP_PROJECTKEY}`;
+const apiToken = `${process.env.REACT_APP_APIKEY}`;
 const uri = `https://app.launchdarkly.com/api/v2/flags/${projKey}?env=${environment}&tag=${ldTag}&offset=0&summary=true`;
 let getConfig = {
 	"method": "GET",

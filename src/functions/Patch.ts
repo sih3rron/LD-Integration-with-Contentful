@@ -1,16 +1,13 @@
-const projKey = "default";
-const environment = "production";
-const apiToken = "api-bfb311e8-b47c-4539-980d-f28b92ac8612";
+const environment = `${process.env.REACT_APP_ENVIRONMENT}`;
+const projKey = `${process.env.REACT_APP_PROJECTKEY}`;
+const apiToken = `${process.env.REACT_APP_APIKEY}`;
 
 let patchConfigOn = {
 	"method": "Patch",
 	"headers": {
 		"Content-Type": "application/json",
 		"authorization": apiToken,
-		"LD-API-Version": "beta",
-        "Access-Control-Allow-Headers": "Accept, Content-Type, Content-Length, Accept-Encoding, Authorization",
-        "Access-Control-Allow-Methods": "OPTIONS, GET, DELETE, PATCH",
-        "Access-Control-Allow-Origin": "*"
+		"LD-API-Version": "beta"
 	},
     "body": JSON.stringify({
         "environmentKey": environment,
@@ -24,10 +21,7 @@ let patchConfigOff = {
 	"headers": {
 		"Content-Type": "application/json",
 		"authorization": apiToken,
-		"LD-API-Version": "beta",
-        "Access-Control-Allow-Headers": "Accept, Content-Type, Content-Length, Accept-Encoding, Authorization",
-        "Access-Control-Allow-Methods": "OPTIONS, GET, DELETE, PATCH",
-        "Access-Control-Allow-Origin": "*"
+		"LD-API-Version": "beta"
 	},
     "body": JSON.stringify({
         "environmentKey": environment,
