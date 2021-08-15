@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import { EntityListItem, DropdownList, DropdownListItem } from '@contentful/forma-36-react-components';
+import { EntityListItem, DropdownList, DropdownListItem, SkeletonContainer, SkeletonDisplayText, SkeletonBodyText } from '@contentful/forma-36-react-components';
 import Patch from '../functions/Patch';
 const ldTag = "Contentful";
 const environment = "production";
@@ -41,9 +41,23 @@ export default function Flags(){
         });
     });
 
+//Needs attn and correcting.
+    const entitySkeleton = <SkeletonContainer   
+        backgroundColor="#e5ebed"
+        foregroundColor="#f7f9fa"
+        height="100"
+        speed={2}
+        width="100%"><SkeletonDisplayText 
+        numberOfLines={2} 
+        /><SkeletonBodyText
+        numberOfLines={2}
+        offsetTop={35}
+      />
+        </SkeletonContainer>
+
     return (
         <div>
-            {loading ? "Loading" : flags.map((flag: any, i: number) => {
+            {loading ? entitySkeleton : flags.map((flag: any, i: number) => {
               return (
                 <EntityListItem 
                     key={ i }  

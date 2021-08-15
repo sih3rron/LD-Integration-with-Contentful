@@ -7,7 +7,10 @@ let patchConfigOn = {
 	"headers": {
 		"Content-Type": "application/json",
 		"authorization": apiToken,
-		"LD-API-Version": "beta"
+		"LD-API-Version": "beta",
+        "Access-Control-Allow-Headers": "Accept, Content-Type, Content-Length, Accept-Encoding, Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS, GET, DELETE, PATCH",
+        "Access-Control-Allow-Origin": "*"
 	},
     "body": JSON.stringify({
         "environmentKey": environment,
@@ -15,12 +18,16 @@ let patchConfigOn = {
       })
 }
 
+
 let patchConfigOff = {
 	"method": "Patch",
 	"headers": {
 		"Content-Type": "application/json",
 		"authorization": apiToken,
-		"LD-API-Version": "beta"
+		"LD-API-Version": "beta",
+        "Access-Control-Allow-Headers": "Accept, Content-Type, Content-Length, Accept-Encoding, Authorization",
+        "Access-Control-Allow-Methods": "OPTIONS, GET, DELETE, PATCH",
+        "Access-Control-Allow-Origin": "*"
 	},
     "body": JSON.stringify({
         "environmentKey": environment,
