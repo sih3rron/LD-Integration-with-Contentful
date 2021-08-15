@@ -10,6 +10,8 @@ let patchConfigOn = {
 		"LD-API-Version": "beta"
 	},
     "body": JSON.stringify({
+        "environmentKey": environment,
+        "comment": "This flag was switched off via the Contentful integration.",
         "instructions": [{"kind": "turnFlagOn"}]
       })
 }
@@ -23,6 +25,7 @@ let patchConfigOff = {
 	},
     "body": JSON.stringify({
         "environmentKey": environment,
+        "comment": "This flag was switched off via the Contentful integration.",
         "instructions": [{"kind": "turnFlagOff"}]
       })
 }
@@ -31,7 +34,7 @@ const FlagPatch = async (flagName: string, currentState: boolean)=> {
     try {
         const response = await fetch(`https://app.launchdarkly.com/api/v2/flags/${projKey}/${flagName}`, currentState === true ? patchConfigOff : patchConfigOn);
         const json = await response.json();
-        json.status === 200 ? console.log("\x1b[32m","PATCH: Fine.") : console.log("\x1b[31m",`PATCH Fail: We have a ${json.status}`);
+        console.log(json)
     }
     catch (error){
         console.log(error)

@@ -42,16 +42,16 @@ export default function Flags(){
 
 //Needs attn and correcting.
     const entitySkeleton = <SkeletonContainer   
-        backgroundColor="#e5ebed"
-        foregroundColor="#f7f9fa"
-        height="100"
-        speed={2}
-        width="100%"><SkeletonDisplayText 
-        numberOfLines={2} 
+            backgroundColor="#e5ebed"
+            foregroundColor="#f7f9fa"
+            height="100"
+            speed={2}
+            width="100%"><SkeletonDisplayText 
+            numberOfLines={2} 
         /><SkeletonBodyText
-        numberOfLines={2}
-        offsetTop={35}
-      />
+            numberOfLines={2}
+            offsetTop={35}
+        />
         </SkeletonContainer>
 
     return (
