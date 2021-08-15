@@ -11,7 +11,7 @@ let patchConfigOn = {
 	},
     "body": JSON.stringify({
         "environmentKey": environment,
-        "comment": "This flag was switched off via the Contentful integration.",
+        "comment": "This flag was switched on via the Contentful integration.",
         "instructions": [{"kind": "turnFlagOn"}]
       })
 }
