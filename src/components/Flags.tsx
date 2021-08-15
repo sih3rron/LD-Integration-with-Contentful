@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react';
 import { EntityListItem, DropdownList, DropdownListItem, SkeletonContainer, SkeletonDisplayText, SkeletonBodyText } from '@contentful/forma-36-react-components';
-import Patch from '../functions/Patch';
+import FlagPatch from '../functions/Patch';
 const ldTag = `${process.env.REACT_APP_LDTAG}`;
 const environment = `${process.env.REACT_APP_ENVIRONMENT}`;
 const projKey = `${process.env.REACT_APP_PROJECTKEY}`;
@@ -30,7 +30,6 @@ export default function Flags(){
             setLoading(false);
             setFlags(subset);
             setError("");
-        // eslint-disable-next-line 
             return flags;
 
             })
@@ -63,7 +62,7 @@ export default function Flags(){
                     key={ i }  
                     title={ flag[1].name }
                     description={ flag[1].description }  
-                    dropdownListElements={<DropdownList><DropdownListItem onClick={()=>{Patch(flag[1].name, flag[1].environments.production.on)}}>{flag[1].environments.production.on === true ? "Deactivate" : "Activate"}</DropdownListItem></DropdownList>}
+                    dropdownListElements={<DropdownList><DropdownListItem onClick={()=>{FlagPatch(flag[1].name, flag[1].environments.production.on)}}>{flag[1].environments.production.on === true ? "Deactivate" : "Activate"}</DropdownListItem></DropdownList>}
                     withThumbnail={ false }
                     thumbnailUrl="https://prismic-io.s3.amazonaws.com/launchdarkly/29b87739-0fa9-489a-bb0f-5aa825a10509_Feature_Flags_Icon.svg"
                     status={ flag[1].environments.production.on === true ? "published" : "draft" }
