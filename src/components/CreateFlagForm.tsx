@@ -1,23 +1,36 @@
-import React from 'react';
-import { Form, SelectField, Option, TextField, Button, FieldGroup } from '@contentful/forma-36-react-components';
+import { useState } from 'react';
+import { Form, SelectField, Option, Button, Card, Typography, Heading, Paragraph, TextField } from '@contentful/forma-36-react-components';
+import CreateVariation from './CreateVariation';
 
 const CreateFlagForm = () => {
+    const [flagType, setFlagType] = useState("Boolean");
+
     return (
         <Form 
             onSubmit={()=>{console.log("I dun a thing!")}}
             spacing="condensed"
         >
+        <Heading>LaunchDarkly - Flag Pole.</Heading>
+        <Paragraph>Welcome to Flag Pole. In order to access your Feature Flags have you completed the following tasks: </Paragraph>
+        
         <SelectField
             id="flagTypeSelectionInput"
             formLabelProps={{
-                requiredText: 'Required Text'
+                requiredText: 'Required'
             }}
             labelText="What 'Type' of Feature Flag are you trying to create?"
             name="Select your feature flag type."
             selectProps={{
                 width: 'full'
             }}
-            value="optionOne"
+            value="Boolean"
+            onChange={(event)=>{
+                const typeValue = event.target.value;
+                console.log(event)
+                console.log(event.target.value)
+                setFlagType(typeValue)
+            }}
+            
         >
             <Option value="Boolean">
                 Boolean: True or False.
@@ -50,27 +63,20 @@ const CreateFlagForm = () => {
             }}
             textarea
         />
-        <FieldGroup>
-            <TextField 
-                id="variationNameInput"
-                labelText="Flag Variation Name"
-                name="Variation Name"
-                width="medium"
-            />
-            <TextField 
-                id="variationDescriptionInput"
-                labelText="Flag Variation Description"
-                name="Variation Description"
-                width="medium"
-            />
-            <TextField
-                id="variationValueInput"
-                labelText="Flag Variation Value"
-                name="Variation Value"
-                width="medium"
-            />
+        <Card>
+        <Typography>
+            <Heading>
+                Variation Assignment.
+            </Heading>
+            <Paragraph>
+                Every feature flag always has at least two variations assigned. 
+                Each variation requires a name, description, and value.
+            </Paragraph>
+        </Typography>
+        <hr />
+        <CreateVariation flagType={flagType}/>
+        </Card>
 
-        </FieldGroup>
         <Button
             type="submit"
             size="medium"
