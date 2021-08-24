@@ -1,0 +1,24 @@
+{
+    "name": "My Example Flag for Test",
+    "key": "example-flag-test",
+    "description": "Just Testing",
+    "variations": [
+      {
+        "value": "Top",
+        "name": "Top Style",
+        "description": "The Top variation"
+      },
+      {
+        "value": "Bottom",
+        "name": "Bottom Style",
+        "description": "The Bottom variation"
+      }
+    ],
+    "defaults": {
+      "onVariation": 1,
+      "offVariation": 0
+    },
+    "includeInSnippet": true,
+    "temporary": true,
+    "tags": ["Contentful"]
+  }

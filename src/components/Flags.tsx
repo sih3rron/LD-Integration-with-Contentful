@@ -1,10 +1,11 @@
 import {useState, useEffect} from 'react';
 import { EntityListItem, DropdownList, DropdownListItem, SkeletonContainer, SkeletonDisplayText, SkeletonBodyText } from '@contentful/forma-36-react-components';
+import ModalExample from './ModalExample';
 import FlagPatch from '../functions/Patch';
-const ldTag = `${process.env.REACT_APP_LDTAG}`;
-const environment = `${process.env.REACT_APP_ENVIRONMENT}`;
-const projKey = `${process.env.REACT_APP_PROJECTKEY}`;
-const apiToken = `${process.env.REACT_APP_APIKEY}`;
+export const ldTag = `${process.env.REACT_APP_LDTAG}`;
+export const environment = `${process.env.REACT_APP_ENVIRONMENT}`;
+export const projKey = `${process.env.REACT_APP_PROJECTKEY}`;
+export const apiToken = `${process.env.REACT_APP_APIKEY}`;
 const uri = `https://app.launchdarkly.com/api/v2/flags/${projKey}?env=${environment}&tag=${ldTag}&offset=0&summary=true`;
 let getConfig = {
 	"method": "GET",
@@ -26,10 +27,10 @@ export default function Flags(){
         .then(async response => {
             let data = await response.json();
             let subset: any[] = Object.entries(data.items);
-            
             setLoading(false);
             setFlags(subset);
             setError("");
+            
             return flags;
 
             })
@@ -53,7 +54,7 @@ export default function Flags(){
             offsetTop={35}
         />
         </SkeletonContainer>
-
+        
     return (
         <div>
             {loading ? entitySkeleton : flags.map((flag: any, i: number) => {
@@ -62,7 +63,13 @@ export default function Flags(){
                     key={ i }  
                     title={ flag[1].name }
                     description={ flag[1].description }  
-                    dropdownListElements={<DropdownList><DropdownListItem onClick={()=>{FlagPatch(flag[1].name, flag[1].environments.production.on)}}>{flag[1].environments.production.on === true ? "Deactivate" : "Activate"}</DropdownListItem></DropdownList>}
+                    dropdownListElements={
+                        <DropdownList>
+                            <DropdownListItem onClick={()=>{FlagPatch(flag[1].name, flag[1].environments.production.on)}}>
+                                {flag[1].environments.production.on === true ? "Deactivate" : "Activate"}
+                            </DropdownListItem>
+                            <ModalExample Name={flag[1].name} On={flag[1].environments.production.on}/>
+                        </DropdownList>}
                     withThumbnail={ false }
                     thumbnailUrl="https://prismic-io.s3.amazonaws.com/launchdarkly/29b87739-0fa9-489a-bb0f-5aa825a10509_Feature_Flags_Icon.svg"
                     status={ flag[1].environments.production.on === true ? "published" : "draft" }

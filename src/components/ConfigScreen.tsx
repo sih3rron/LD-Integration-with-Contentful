@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { AppExtensionSDK } from '@contentful/app-sdk';
 import { Heading, Form, Workbench, Paragraph} from '@contentful/forma-36-react-components';
 import { css } from 'emotion';
+import CreateFlagForm from './CreateFlagForm';
 
 export interface AppInstallationParameters {}
 
@@ -58,7 +59,7 @@ const Config = (props: ConfigProps) => {
       <Form>
         <Heading>LaunchDarkly - Flag Pole.</Heading>
         <Paragraph>Welcome to Flag Pole. In order to access your Feature Flags have you completed the following tasks: </Paragraph>
-
+        <CreateFlagForm />
       </Form>
     </Workbench>
   );
