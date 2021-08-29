@@ -1,16 +1,15 @@
 import React from 'react'
 import { FieldGroup, Flex, TextInput  } from '@contentful/forma-36-react-components'
 
-interface VariationProps {
+interface MvtVariationProps {
     flagType?: string,
-    flagValue?: string,
-    disabled: boolean,
-    isReadOnly: boolean,
+    key: number
 }
 
-const Variation = (props: VariationProps) => {
+const MvtVariation = (props: MvtVariationProps) => {
     return (
-        <FieldGroup>
+        <>
+        <FieldGroup className="assignment">
             <Flex
                 alignItems="center"
                 flexWrap="wrap"
@@ -52,14 +51,13 @@ const Variation = (props: VariationProps) => {
                     name="Variation value"
                     width="medium"
                     placeholder="Variation value."
-                    value={props.flagValue}
-                    isReadOnly={props.isReadOnly}
-                    disabled={props.disabled}
+                    value=""
                 />
             </div>
             </Flex>
             </FieldGroup>
+            </>
     )
 };
 
-export default Variation;
+export default MvtVariation;

@@ -56,7 +56,7 @@ const Config = (props: ConfigProps) => {
 
   return (
     <Workbench className={css({ margin: '80px' })}>
-        <CreateFlagForm />
+      <CreateFlagForm />
     </Workbench>
   );
 }

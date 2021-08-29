@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Form, SelectField, Option, Button, Card, Typography, Heading, Paragraph, TextField } from '@contentful/forma-36-react-components';
+import { Form, SelectField, Option, Button, Card, Typography, Heading, Paragraph, TextField, Tag, SectionHeading } from '@contentful/forma-36-react-components';
 import CreateVariation from './CreateVariation';
 
 const CreateFlagForm = () => {
@@ -26,8 +26,6 @@ const CreateFlagForm = () => {
             value="Boolean"
             onChange={(event)=>{
                 const typeValue = event.target.value;
-                console.log(event)
-                console.log(event.target.value)
                 setFlagType(typeValue)
             }}
             
@@ -39,6 +37,7 @@ const CreateFlagForm = () => {
                 Multiple Variation.
             </Option>
         </SelectField>
+
         <TextField 
             required
             id="flagNameInput"
@@ -51,6 +50,7 @@ const CreateFlagForm = () => {
             }}
             value=""
         />
+        
         <TextField
             required
             id="flagDescriptionInput"
@@ -63,11 +63,12 @@ const CreateFlagForm = () => {
             }}
             textarea
         />
+
         <Card>
         <Typography>
-            <Heading>
+            <SectionHeading element="h4">
                 Variation Assignment.
-            </Heading>
+            </SectionHeading>
             <Paragraph>
                 Every feature flag always has at least two variations assigned. 
                 Each variation requires a name, description, and value.
@@ -77,12 +78,26 @@ const CreateFlagForm = () => {
         <CreateVariation flagType={flagType}/>
         </Card>
 
+        <Card>
+            <Typography>
+                <SectionHeading element="h4">
+                    Tags
+                </SectionHeading>
+            </Typography>
+            <Tag 
+                tagType="primary-filled"
+                size="default"
+            >Contentful</Tag>
+            
+        </Card>
+
         <Button
             type="submit"
             size="medium"
         >
             Submit
         </Button>
+
         </Form>
     )
 };
