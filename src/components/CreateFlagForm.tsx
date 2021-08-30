@@ -1,9 +1,15 @@
 import { useState } from 'react';
-import { Form, SelectField, Option, Button, Card, Typography, Heading, Paragraph, TextField, Tag, SectionHeading } from '@contentful/forma-36-react-components';
+import { Form, SelectField, Option, Button, Card, Typography, Heading, Paragraph, TextField, Tag, SectionHeading, TextInput } from '@contentful/forma-36-react-components';
 import CreateVariation from './CreateVariation';
 
 const CreateFlagForm = () => {
     const [flagType, setFlagType] = useState("Boolean");
+    const [flagKey, setFlagKey] = useState("");
+    const formatFlagKey = (key: string) => {
+        let myKey = flagKey.toLowerCase();
+        myKey = myKey.replace(/\s+/g, '-')
+        return myKey
+    }
 
     return (
         <Form 
@@ -11,7 +17,7 @@ const CreateFlagForm = () => {
             spacing="condensed"
         >
         <Heading>LaunchDarkly - Flag Pole.</Heading>
-        <Paragraph>Welcome to Flag Pole. In order to access your Feature Flags have you completed the following tasks: </Paragraph>
+        <Paragraph>Welcome to Flag Pole. </Paragraph>
         
         <SelectField
             id="flagTypeSelectionInput"
@@ -48,7 +54,19 @@ const CreateFlagForm = () => {
                 maxLength: 50,
                 placeholder: 'Give your flag a meaningful name to help others understand it\'s core function.',
             }}
-            value=""
+            onChange={ e =>{setFlagKey(e.target.value)} }
+            value={flagKey}
+        />
+
+        <TextInput 
+            id="flagKeyInput"
+            labelText="Derived Flag Key"
+            name="Derived Flag Key"
+            placeholder="Flag Key."
+            value={formatFlagKey(flagKey)}
+            isReadOnly
+            disabled
+            withCopyButton
         />
         
         <TextField
@@ -84,6 +102,7 @@ const CreateFlagForm = () => {
                     Tags
                 </SectionHeading>
             </Typography>
+
             <Tag 
                 tagType="primary-filled"
                 size="default"
