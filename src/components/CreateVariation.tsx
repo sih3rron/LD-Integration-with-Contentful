@@ -17,7 +17,7 @@ const CreateVariation = (props: CreateVariationProps) => {
 
     const handleRemoveVariant = () => {
         let lastIndex = variation.length
-        setVariation(variation.splice(0, 1))
+        setVariation(variation.slice(0, lastIndex-1))
         console.log(variation)
 
     }
