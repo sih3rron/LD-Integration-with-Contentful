@@ -1,17 +1,13 @@
 import {useState, useEffect} from 'react';
 import { EntityListItem, DropdownList, DropdownListItem, SkeletonContainer, SkeletonDisplayText, SkeletonBodyText } from '@contentful/forma-36-react-components';
-import ModalExample from './ModalExample';
-import FlagPatch from '../functions/Patch';
-export const ldTag = `${process.env.REACT_APP_LDTAG}`;
-export const environment = `${process.env.REACT_APP_ENVIRONMENT}`;
-export const projKey = `${process.env.REACT_APP_PROJECTKEY}`;
-export const apiToken = `${process.env.REACT_APP_APIKEY}`;
-const uri = `https://app.launchdarkly.com/api/v2/flags/${projKey}?env=${environment}&tag=${ldTag}&offset=0&summary=true`;
+import FlagPatch from '../functions/FlagPatch';
+import ExperimentPatch from '../functions/ExperimentPatch';
+const uri = `https://app.launchdarkly.com/api/v2/flags/${process.env.REACT_APP_PROJECTKEY}?env=${process.env.REACT_APP_ENVIRONMENT}&tag=${process.env.REACT_APP_LDTAG}&offset=0&summary=true`;
 let getConfig = {
 	"method": "GET",
 	"headers": {
 		"Content-Type": "application/json",
-		"authorization": apiToken,
+		"authorization": `${process.env.REACT_APP_APIKEY}`,
 		"LD-API-Version": "beta"
 	}
 }
@@ -30,9 +26,7 @@ export default function Flags(){
             setLoading(false);
             setFlags(subset);
             setError("");
-            
-            return flags;
-
+                return flags;
             })
         .catch(error => {
             setLoading(false);
@@ -54,10 +48,15 @@ export default function Flags(){
             offsetTop={35}
         />
         </SkeletonContainer>
-        
+
+        const isProduction = (elem: string|undefined )=>{
+                return elem === 'production';
+        }
+
     return (
         <div>
-            {loading ? entitySkeleton : flags.map((flag: any, i: number) => {
+            { loading ? entitySkeleton : flags.map((flag: any, i: number) => {
+                let metricId = flag[1].experiments.items.length;
               return (
                 <EntityListItem 
                     key={ i }  
@@ -65,18 +64,22 @@ export default function Flags(){
                     description={ flag[1].description }  
                     dropdownListElements={
                         <DropdownList>
-                            <DropdownListItem onClick={()=>{FlagPatch(flag[1].name, flag[1].environments.production.on)}}>
-                                {flag[1].environments.production.on === true ? "Deactivate" : "Activate"}
+                            <DropdownListItem onClick={()=>{ FlagPatch(flag[1].name, flag[1].environments.production.on) }}>
+                                { flag[1].environments.production.on === true ? "Deactivate Flag" : "Activate Flag" }
                             </DropdownListItem>
-                            <ModalExample Name={flag[1].name} On={flag[1].environments.production.on}/>
+                                { flag[1].experiments.items[0] ?
+                            <DropdownListItem onClick={()=>{ ExperimentPatch(flag[1].name, flag[1].experiments.items[0].environments.find(isProduction) === "production" ? true : false, metricId) }}>
+                                { flag[1].experiments.items[0].environments.find(isProduction) === "production" ? "Pause Experiment" : "Start Experiment" }
+                            </DropdownListItem> : null
+                            }
                         </DropdownList>}
                     withThumbnail={ false }
                     thumbnailUrl="https://prismic-io.s3.amazonaws.com/launchdarkly/29b87739-0fa9-489a-bb0f-5aa825a10509_Feature_Flags_Icon.svg"
                     status={ flag[1].environments.production.on === true ? "published" : "draft" }
                 />
                 )
-            })}
-            {error ? error : null}
+            }) }
+            { error ? error : null }
         </div>
         )
 }

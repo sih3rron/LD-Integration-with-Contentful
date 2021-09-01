@@ -1,8 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { AppExtensionSDK } from '@contentful/app-sdk';
-import { Workbench,} from '@contentful/forma-36-react-components';
+import { Heading, Paragraph, Typography, Workbench,} from '@contentful/forma-36-react-components';
 import { css } from 'emotion';
-import CreateFlagForm from './CreateFlagForm';
 
 export interface AppInstallationParameters {}
 
@@ -56,7 +55,10 @@ const Config = (props: ConfigProps) => {
 
   return (
     <Workbench className={css({ margin: '80px' })}>
-      <CreateFlagForm />
+      <Typography>
+        <Heading>LaunchDarkly - Flag Pole.</Heading>
+        <Paragraph>Welcome to Flag Pole. </Paragraph>
+        </Typography>
     </Workbench>
   );
 }
