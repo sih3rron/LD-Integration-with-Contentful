@@ -36,22 +36,22 @@ export default function Flags(){
     });
 
 //Needs attn and correcting.
-    const entitySkeleton = <SkeletonContainer   
-            backgroundColor="#e5ebed"
-            foregroundColor="#f7f9fa"
-            height="100"
-            speed={2}
-            width="100%"><SkeletonDisplayText 
-            numberOfLines={2} 
-        /><SkeletonBodyText
-            numberOfLines={2}
-            offsetTop={35}
-        />
-        </SkeletonContainer>
+    const entitySkeleton = <SkeletonContainer
+                            backgroundColor="#e5ebed"
+                            foregroundColor="#f7f9fa"
+                            height="100"
+                            speed={2}
+                            width="100%"
+                            ><SkeletonDisplayText numberOfLines={1} />
+                            <SkeletonBodyText
+                            numberOfLines={3}
+                            offsetTop={35}
+                            />
+                            </SkeletonContainer>
 
-        const isProduction = (elem: string|undefined )=>{
-                return elem === 'production';
-        }
+    const isProduction = (elem: string|undefined )=>{
+            return elem === 'production';
+    }
 
     return (
         <div>
@@ -74,7 +74,6 @@ export default function Flags(){
                             }
                         </DropdownList>}
                     withThumbnail={ false }
-                    thumbnailUrl="https://prismic-io.s3.amazonaws.com/launchdarkly/29b87739-0fa9-489a-bb0f-5aa825a10509_Feature_Flags_Icon.svg"
                     status={ flag[1].environments.production.on === true ? "published" : "draft" }
                 />
                 )
