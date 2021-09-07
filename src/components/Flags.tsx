@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { EntityListItem, DropdownList, DropdownListItem, SkeletonContainer, SkeletonDisplayText, SkeletonBodyText } from '@contentful/forma-36-react-components';
 import FlagPatch from '../functions/FlagPatch';
 import ExperimentPatch from '../functions/ExperimentPatch';
@@ -37,19 +37,19 @@ export default function Flags(){
 
 //Needs attn and correcting.
     const entitySkeleton = <SkeletonContainer
-                            backgroundColor="#e5ebed"
-                            foregroundColor="#f7f9fa"
-                            height="100"
-                            speed={2}
-                            width="100%"
+                                backgroundColor="#e5ebed"
+                                foregroundColor="#f7f9fa"
+                                height="100"
+                                speed={2}
+                                width="100%"
                             ><SkeletonDisplayText numberOfLines={1} />
                             <SkeletonBodyText
-                            numberOfLines={3}
-                            offsetTop={35}
+                                numberOfLines={3}
+                                offsetTop={35}
                             />
                             </SkeletonContainer>
 
-    const isProduction = (elem: string|undefined )=>{
+    const isProduction = (elem: string|undefined )=> {
             return elem === 'production';
     }
 
@@ -72,6 +72,7 @@ export default function Flags(){
                                 { flag[1].experiments.items[0].environments.find(isProduction) === "production" ? "Pause Experiment" : "Start Experiment" }
                             </DropdownListItem> : null
                             }
+                            
                         </DropdownList>}
                     withThumbnail={ false }
                     status={ flag[1].environments.production.on === true ? "published" : "draft" }
